@@ -26,7 +26,7 @@ $data = muusaLoginHelper::getHalp();
             $gradientColor = "pink";
             $imagename = "owemoney";
             $direction =  "      Click the link above to remit payment via PayPal.\n";
-         } else if($data[5]) { // Camper is over 17 and has no room assigned
+         } else if($data[5] && ($data[4] || $data[7])) { // Camper is over 20 and has no room assigned AND (preregistered OR 30 days past open)
             $gradientColor = "yellow";
             $imagename = "noroom";
             $direction =  "      Click the link above to select a room.\n";
