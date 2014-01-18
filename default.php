@@ -24,30 +24,30 @@ $data = muusaLoginHelper::getHalp();
          // TODO: Add Workshop Logic
          if($data[5]) { // Camper balance without housing fees less than 0
             $gradientColor = "pink";
-            $imagename = "owemoney";
+            $imagename = "fa-dollar";
             $direction =  "      Click the link above to remit payment via PayPal.\n";
          } else if($data[5] && ($data[4] || $data[7])) { // Camper is over 20 and has no room assigned AND (preregistered OR 30 days past open)
             $gradientColor = "yellow";
-            $imagename = "noroom";
+            $imagename = "fa-question-circle";
             $direction =  "      Click the link above to select a room.\n";
          } else {
             $gradientColor = "lightgreen";
-            $imagename = "ready";
+            $imagename = "fa-check-circle";
             $direction =  "      You are ready for camp!\n";
          }
       } else {          // Camper is not registered
          $gradientColor = "darkgray";
-         $imagename = "register";
+         $imagename = "fa-pencil-square-o";
          $direction =  "      Click the link above to register now.\n";
       }
    } else {            // Registration has not begun
       if($data[4]) {   // Camper is preregistered
          $gradientColor = "rgba(117, 167, 0, 0.9)";
-         $imagename = "prereg";
+         $imagename = "fa-calendar";
          $direction =  "      <b>You are preregistered for camp</b>! Check back $data[1] for priority registration.\n";
       }else {
          $gradientColor = "lightgray";
-         $imagename = "nostarted";
+         $imagename = "fa-calendar-o";
          $direction =  "      Check back $data[1] to register for camp.\n";
       }
    }
@@ -57,7 +57,7 @@ $data = muusaLoginHelper::getHalp();
       $imagename = "new";
       $namerow = "      Welcome to MUUSA!<br />\n";
    }
-   echo  "      <div style='float:right;position:relative;right:45px;margin-top:-80px;'><img src='images/muusa/$imagename.png' style='position:absolute' /></div>\n";
+   echo  "      <div style='float:right;position:relative;right:-25px;margin-top:-40px;'><i class='fa $imagename fa-5x' style='text-shadow:3px 3px 15px $gradientColor'></i></div>\n";
    echo $namerow . $direction . "<br />\n";
    echo "   </div>\n";
    endif; ?>
