@@ -47,7 +47,7 @@ $data = muusaLoginHelper::getHalp();
          $direction =  "      <b>You are preregistered for camp</b>! Check back $data[1] for priority registration.\n";
       }else {
          $gradientColor = "lightgray";
-         $imagename = "fa-calendar-o";
+         $imagename = "fa-info-circle";
          $direction =  "      Check back $data[1] to register for camp.\n";
       }
    }
