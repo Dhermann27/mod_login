@@ -10,22 +10,22 @@
 defined('_JEXEC') or die;
 
 class muusaLoginHelper
-{   
+{
    static function getHalp()
    {
       $db =& JFactory::getDBO();
       $user = JFactory::getUser();
-      $query = "SELECT IF(DATEDIFF(y.open, NOW())<0,1,0) zero, DATE_FORMAT(y.open, '%b %D') one, ";
+      $query = "SELECT IF(DATEDIFF(y.open, NOW())<=0,1,0) zero, DATE_FORMAT(y.open, '%b %D') one, ";
       $query .= "      CONCAT(c.firstname, ' ', c.lastname) two, IF(ya.id,1,0) three, muusa_isprereg(c.id, y.year) four, ";
       $query .= "      IF(ya.roomid=0 AND muusa_getage(c.birthdate, y.year)>20,1,0) five, ";
-      $query .= "      (SELECT IF(IFNULL(SUM(th.amount),0) < 0,1,0)) six, IF(DATEDIFF(DATE_ADD(y.open, INTERVAL 30 DAY), NOW())<0,1,0) seven ";
+      $query .= "      (SELECT IF(IFNULL(SUM(th.amount),0)>0,1,0) FROM  muusa_thisyear_charge th WHERE th.familyid=c.familyid AND th.chargetypeid!=1000) six,";
+      $query .= "      IF(DATEDIFF(DATE_ADD(y.open, INTERVAL 30 DAY), NOW())<=0,1,0) seven ";
       $query .= "   FROM muusa_year y ";
       $query .= "   LEFT JOIN muusa_camper c ON c.email='$user->email' ";
       $query .= "   LEFT JOIN muusa_yearattending ya ON c.id=ya.camperid AND y.year=ya.year ";
-      $query .= "   LEFT JOIN muusa_thisyear_charge th ON th.familyid=c.familyid AND th.chargetypeid!=1000 ";
-      $query .= "   WHERE y.is_current=1"; // DEBUG
+      $query .= "   WHERE y.is_current=1";
       $db->setQuery($query);
       return $db->loadRow();
    }
-   
+
 }

@@ -22,7 +22,7 @@ $data = muusaLoginHelper::getHalp();
    if($data[0]) {       // Registration is open
       if($data[3]) {    // Camper is registered
          // TODO: Add Workshop Logic
-         if($data[5]) { // Camper balance without housing fees less than 0
+         if($data[6]) { // Camper balance without housing fees greater than 0
             $gradientColor = "pink";
             $imagename = "fa-dollar";
             $direction =  "      Click the link above to remit payment via PayPal.\n";
@@ -30,6 +30,10 @@ $data = muusaLoginHelper::getHalp();
             $gradientColor = "yellow";
             $imagename = "fa-question-circle";
             $direction =  "      Click the link above to select a room.\n";
+         } else if($data[5]) { // Camper is over 20 and has no room assigned but Priority Registration
+            $gradientColor = "orange";
+            $imagename = "fa-calendar";
+            $direction =  "      You do not have a room selected, but Priority Registration is still in effect.\n";
          } else {
             $gradientColor = "lightgreen";
             $imagename = "fa-check-circle";
